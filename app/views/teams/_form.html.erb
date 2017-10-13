@@ -1,0 +1,40 @@
+<% if @projects.empty? %>
+    You have no projects
+<% else %>
+    <%= form_for(@team, :html => {:class => 'form-horizontal', :multipart => true, :data => {:abide => true}}) do |f| %>
+      <div class="pane3-padding">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="project-card">
+              <div class="card-block">
+                <div class="form-content form-below">
+                  <%= build_validated_field('team', 'name', 'Name', 'Cannot be blank', '[a-zA-Z]+', 'text', @team.name) %>
+                  <%= build_validated_field('team', 'code', 'Code', 'Cannot be blank', '[a-zA-Z]+', 'text', @team.code) %>
+                  <%= build_field('team', 'description', 'Description', 'text_area', @team.description) %>
+                  <%= build_field('team', 'image', 'Image', 'file',@team.image) %>
+                  <%= f.label :project_id, "Department" %>
+                  <%= f.select :project_id, @projects.map { |x| [x.name, x.id] } %>
+                  <%= f.label :team_lead_ids, 'Project leads' %>
+                  <%= f.select :team_lead_ids, @users.map { |x| [x.name, x.id] }, {}, {:multiple => true} %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pane3-padding">
+        <div class="right">
+          <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                      teams_path, :class => 'button alert' %>
+          <%= f.submit nil, :class => 'button success', :disable_with => "Saving" %>
+        </div>
+      </div>
+  <% end %>
+<% end %>
+
+<script type="text/javascript">
+    window.location = '#pane3'
+</script>
+
+
+

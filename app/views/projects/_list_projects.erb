@@ -1,0 +1,18 @@
+<div class="card-header text-uppercase"></div>
+<div class="items-list">
+<% projects.each do |project| %>
+      <div class="il-item">
+        <a class="text-black" href="#">
+          <div class="media">
+            <div class="media-body">
+              <div class="col-sm-6">
+                <h6 class="media-heading">
+                  <%= link_to project.name, project_path(project), :remote => false, :class => 'grey-link' %>
+                </h6>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+  <% end %>
+</div>
